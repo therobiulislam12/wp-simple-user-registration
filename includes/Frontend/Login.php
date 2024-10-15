@@ -32,7 +32,8 @@ class Login {
 
         wp_localize_script('sur-login-form', 'SimpleUserRegistration', array(
             'ajax_url' => admin_url('admin-ajax.php'),
-            'login_nonce' => wp_create_nonce('simple-user-login')
+            'login_nonce' => wp_create_nonce('simple-user-login'),
+            'registration_nonce' => wp_create_nonce('simple-user-registration')
         ));
     }
 

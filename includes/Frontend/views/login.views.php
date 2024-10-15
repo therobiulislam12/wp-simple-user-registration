@@ -31,7 +31,7 @@
                 <!-- Login form start -->
 
                 <!-- Sign Up form start -->
-                <form action="#" class="signup">
+                <form class="signup" method="post">
                     <div class="field">
                         <input type="text" placeholder="First Name" name="first_name" required>
                     </div>

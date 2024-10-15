@@ -48,3 +48,29 @@ document
         }
       });
   });
+
+
+  document
+  .querySelector(".form-inner form.signup")
+  .addEventListener("submit", async (event) => {
+    // prevent the default behavior
+    event.preventDefault();
+
+    let formData = new FormData(event.target);
+
+    formData.append("action", "simple_user_registration");
+    formData.append("_ajax_nonce", SimpleUserRegistration.registration_nonce);
+
+    fetch(SimpleUserRegistration.ajax_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        if(res.redirect_url){
+          window.location.href = res.redirect_url;
+        }
+      });
+  });
