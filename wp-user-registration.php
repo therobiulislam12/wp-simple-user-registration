@@ -81,6 +81,8 @@ final class Simple_User_Registration {
 
         if ( is_admin() ) {
             new UserRegistration\Admin();
+        } else {
+            new UserRegistration\Frontend();
         }
     }
 
