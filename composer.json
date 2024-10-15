@@ -1,0 +1,18 @@
+{
+    "name": "therobiulislam12/wp-user-registration",
+    "description": "Simple user registration plugin with composer and react js",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "UserRegistration\\": "includes/"
+        },
+        "files": ["includes/functions.php"]
+    },
+    "authors": [
+        {
+            "name": "Robiul Islam",
+            "email": "therobiulislam12@gmail.com"
+        }
+    ],
+    "require": {}
+}
