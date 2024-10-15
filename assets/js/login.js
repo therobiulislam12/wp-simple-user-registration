@@ -43,6 +43,8 @@ document
         return res.json();
       })
       .then((res) => {
-        console.log('hello');
+        if(res.redirect_url){
+          window.location.href = res.redirect_url;
+        }
       });
   });
