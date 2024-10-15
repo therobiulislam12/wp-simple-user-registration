@@ -14,7 +14,7 @@ class Menu{
             'manage_options',
             'ri-simple-user-registration',
             array($this, 'sur_user_registration_callback'),
-            'dashicons-list-view',
+            'dashicons-groups',
             2
         );
     }
