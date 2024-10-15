@@ -23,3 +23,26 @@ loginLink.onclick = () => {
   loginBtn.click();
   return false;
 };
+
+document
+  .querySelector(".form-inner form.login")
+  .addEventListener("submit", async (event) => {
+    // prevent the default behavior
+    event.preventDefault();
+
+    let formData = new FormData(event.target);
+
+    formData.append("action", "simple_user_login");
+    formData.append("_ajax_nonce", SimpleUserRegistration.login_nonce);
+
+    fetch(SimpleUserRegistration.ajax_url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        console.log('hello');
+      });
+  });

@@ -14,7 +14,7 @@
             </div>
             <div class="form-inner">
                 <!-- Login form start -->
-                <form action="#" class="login">
+                <form class="login" method="post">
                     <div class="field">
                         <input type="username" placeholder="username" required name="username">
                     </div>

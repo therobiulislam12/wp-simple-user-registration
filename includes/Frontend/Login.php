@@ -29,6 +29,11 @@ class Login {
     public function sur_login_enqueue_scripts(){
         wp_register_script('sur-login-form', RI_USER_REGISTRATION_ASSETS_URL . '/js/login.js');
         wp_register_style('sur-login-form', RI_USER_REGISTRATION_ASSETS_URL . '/css/login.css');
+
+        wp_localize_script('sur-login-form', 'SimpleUserRegistration', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'login_nonce' => wp_create_nonce('simple-user-login')
+        ));
     }
 
     /**
