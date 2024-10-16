@@ -29,7 +29,10 @@ class Ajax {
             wp_send_json( $user->get_error_message(), 403 );
         }
 
-        wp_send_json( ['redirect_url' => home_url( 'dashboard' )], 200 );
+        // redirect and message send
+        $message = 'User created and logged in';
+        $slug = get_option('sur_redirect_page_slug') ? home_url(get_option('sur_redirect_page_slug')) : admin_url();
+        wp_send_json( ['redirect_url' => $slug, 'message' => $message], 200 );
     }
 
     public function sur_user_registration_ajax() {
@@ -79,7 +82,8 @@ class Ajax {
     
                 // redirect and message send
                 $message = 'User created and logged in';
-                wp_send_json( ['redirect_url' => home_url( 'dashboard' ), 'message' => $message], 200 );
+                $slug = get_option('sur_redirect_page_slug') ? home_url(get_option('sur_redirect_page_slug')) : admin_url();
+                wp_send_json( ['redirect_url' => $slug, 'message' => $message], 200 );
             } else {
                 wp_send_json( ['message' => $user_id->get_error_message()], 400 );
             }

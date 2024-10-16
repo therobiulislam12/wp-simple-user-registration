@@ -24,6 +24,75 @@ class Menu {
 
         // settings action add
         add_filter( 'plugin_action_links_' . plugin_basename( RI_USER_REGISTRATION_FILE ), [$this, 'sur_plugin_page_options_add'] );
+
+        // settings save
+        add_action( 'admin_init', array( $this, 'sur_register_settings' ) );
+    }
+
+    /**
+     * Register a settings for Simple User Registration plugin
+     * @return void
+     */
+    public function sur_register_settings() {
+        
+        // Register the setting
+        register_setting( 'simple_user_registration_config', 'sur_redirect_page_slug' );
+
+        // Add a section
+        add_settings_section(
+            'sur_main_section',
+            __( 'Main Settings', 'ri-simple-user-registration' ),
+            array( $this, 'sur_section_callback' ),
+            'simple_user_registration_config'
+        );
+
+        // Add a field to the section
+        add_settings_field(
+            'sur_redirect_page_slug',
+            __( 'Set redirect page', 'ri-simple-user-registration' ),
+            array( $this, 'sur_redirect_page_callback' ),
+            'simple_user_registration_config',
+            'sur_main_section'
+        );
+    }
+
+    /**
+     * Main Section callback code
+     * 
+     * @return void
+     */
+    public function sur_section_callback() {
+        echo '<p>' . __('Main configuration settings for your plugin.', 'ri-simple-user-registration') . '</p>';
+    }
+    
+    /**
+     * add input field for redirect page
+     * 
+     * @return void
+     */
+    public function sur_redirect_page_callback() {
+
+        $pages = get_posts([
+            'post_type'      => 'page',
+            'post_status'    => 'publish',  
+            'posts_per_page' => -1 
+        ]);
+        
+        // Get the current value of the option
+        $slug = get_option('sur_redirect_page_slug');
+
+        ?>
+
+        <select name="sur_redirect_page_slug" id="sur_redirect_page_slug">
+            <option value=""><?php _e( 'Select', 'ri-simple-user-registration' ); ?></option>
+            <?php foreach( $pages as $page ): ?>
+                <option value="<?php echo esc_attr( $page->post_name ); ?>" <?php selected( $slug, $page->post_name ); ?>>
+                    <?php echo esc_html( $page->post_title ); ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <?php
     }
 
     /**
