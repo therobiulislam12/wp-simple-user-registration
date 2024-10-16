@@ -55,7 +55,7 @@ class Menu {
      * @since 1.0.0
      */
     public function sur_user_registration_callback() {
-        echo '<div class="wrap"><h1>I am Working</h1></div>';
+        require_once __DIR__ . '/views/menu.views.php';
     }
 
     /**
